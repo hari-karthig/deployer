@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: airports
+  namespace: lunatech
+spec:
+  rules:
+  - host: lunatech.airports.hariprasad-karthigasu.info
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: airports
+          servicePort: 8080
+

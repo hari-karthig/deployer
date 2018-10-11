@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: jenkins
+  namespace: lunatech
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jenkins
+  template:
+    metadata:
+      labels:
+        app: jenkins
+    spec:
+      serviceAccount: jenkins
+      containers:
+      - image: 212104571535.dkr.ecr.us-west-2.amazonaws.com/jenkins
+        imagePullPolicy: Always
+        name: jenkins
+        ports:
+        - name: http
+          containerPort: 8080

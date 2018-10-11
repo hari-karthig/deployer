@@ -1,0 +1,57 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>countries_version</name>
+          <description></description>
+          <defaultValue></defaultValue>
+          <trim>false</trim>
+        </hudson.model.StringParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>#!/usr/bin/env python
+
+import os
+import time
+import sys
+
+version = os.popen(&quot;echo $countries_version&quot;).read()
+
+print (&quot;Deploying version [%s]&quot; %version)
+
+os.system(&quot;kubectl delete deployment countries -n lunatech --ignore-not-found=true&quot;)
+os.system(&quot;kubectl run countries -n lunatech --image=212104571535.dkr.ecr.us-west-2.amazonaws.com/countries:%s&quot; %version)
+os.system(&quot;kubectl expose deployment/countries --port=8080 -n lunatech&quot;)
+    
+time.sleep(120)
+    
+pods = os.popen(&quot;kubectl get pods -n lunatech | grep -i countries&quot;).read()
+pod = pods.split()[0]
+state = pods.split()[2]
+
+if state == &quot;Running&quot;:
+    print (&quot;Pod [%s] is [%s]&quot; %(pod, state))
+    sys.exit(0)
+else:
+    print (&quot;Pod [%s] is [%s]&quot; %(pod, state))
+    sys.exit(1)</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers/>
+  <buildWrappers/>
+</project>

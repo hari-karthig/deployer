@@ -1,2 +1,2 @@
 # lunatech
-Lunatech CI / CD pipeline for application deployments on EKS
+CI/CD pipeline for lunatech application deployment top of EKS
