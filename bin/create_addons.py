@@ -4,6 +4,8 @@ import glob
 import os
 
 addons = []
+
+os.chdir("kube-addons/")
 files = os.listdir(".")
 
 for fle in files:
