@@ -7,8 +7,8 @@ Luna Deployer is an automated module to deploy lunatech applications. Which is r
 - [terraform](https://releases.hashicorp.com/terraform/0.11.8/terraform_0.11.8_linux_amd64.zip)
 - [aws-iam-authenticator](https://amazon-eks.s3-us-west-2.amazonaws.com/1.10.3/2018-07-26/bin/linux/amd64/aws-iam-authenticator)
 - [kubectl](https://storage.googleapis.com/kubernetes-release/release/v1.12.0/bin/linux/amd64/kubectl)
-- [python 2.7 or above]
-- [docker]
+- python 2.7 or above
+- docker
 
 Addition to above you'll have to configure aws credentials
 
