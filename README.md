@@ -46,6 +46,6 @@ This will destroy the EKS cluster
 
 # Known Issues
 
-- [ELB's SG won't be destroyed by `make destroy`. You've to delete it through AWS console once VPC started destroying],
-- [Not able to view Jenkins login page],
-- [Route53 entries should be added/updated through AWS console]
+- ELB's SG won't be destroyed by `make destroy`. You've to delete it through AWS console once VPC started destroying
+- Not able to view Jenkins login page
+- Route53 entries should be added/updated through AWS console
