@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus
+  labels:
+    name: prometheus
+  namespace: kube-system
+data:
+  prometheus.yml: |-
+    global:
+      scrape_interval: 15s
+      evaluation_interval: 15s
+
+    scrape_configs:
+      - job_name: 'node'
+        ec2_sd_configs:
+          - region: us-west-2
+            port: 9099
+        relabel_configs:
+          - source_labels: [__meta_ec2_instance_id]
+            target_label: instance_id
+          - source_labels: [__meta_ec2_availability_zone]
+            target_label: availability_zone
+          - source_labels: [__meta_ec2_instance_state]
+            target_label: instance_state
+          - source_labels: [__meta_ec2_private_ip]
+            target_label: private_ip
+          - source_labels: [__meta_ec2_public_dns_name]
+            target_label: public_dns_name
+          - source_labels: [__meta_ec2_tag_Name]
+            target_label: name

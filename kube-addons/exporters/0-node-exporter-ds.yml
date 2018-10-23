@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  name: node-exporter
+  namespace: kube-system
+spec:
+  template:
+    metadata:
+      labels:
+        app: node-exporter
+      name: node-exporter
+    spec:
+      containers:
+      - image: prom/node-exporter:v0.16.0
+        name: node-exporter
+        args:
+        - "--web.listen-address=0.0.0.0:9099"
+        ports:
+        - name: metrics
+          containerPort: 9099
+          hostPort: 9099
