@@ -1,4 +1,4 @@
-# Luna Deployer
+# Deployer
 
 Luna Deployer is an automated module to deploy lunatech applications. Which is running on EKS and deploying the modules through Jenkins.
 
